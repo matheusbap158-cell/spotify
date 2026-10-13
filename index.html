@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spotify · Som que vira imagem — conceito Connect Alpha</title>
+<meta name="description" content="Conceito independente: uma jornada de rolagem em que a música vira imagem, do silêncio ao Wrapped. Feito pela Connect Alpha.">
+<meta name="theme-color" content="#060507">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/hero.css?v=3">
+</head>
+<body class="carregando">
+
+<!-- carregamento -->
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="loader-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <p class="loader-txt">Afinando <span id="loaderPct">0</span>%</p>
+</div>
+
+<!-- cabeçalho -->
+<header class="topo" id="topo">
+  <a class="marca" href="#inicio" aria-label="Início">
+    <span class="marca-ponto" aria-hidden="true"></span>
+    <span class="marca-nome">Som que vira imagem</span>
+  </a>
+  <nav class="nav" aria-label="Principal">
+    <a href="#cap-1">Jornada</a>
+    <a href="#momentos">Momentos</a>
+    <a href="#recursos">Recursos</a>
+    <a href="#perguntas">Perguntas</a>
+  </nav>
+  <div class="topo-acoes">
+    <button class="btn-som" id="btnSom" type="button" aria-pressed="false" title="Ligar o som (M)">
+      <span class="btn-som-ico" aria-hidden="true"></span><span class="btn-som-txt">Som</span>
+    </button>
+    <a class="btn btn-verde" href="#fim">Ouvir agora</a>
+  </div>
+  <div class="barra" id="barra" aria-hidden="true"></div>
+</header>
+
+<!-- palco: o desenho vive aqui, atrás dos textos -->
+<canvas id="palco" aria-hidden="true"></canvas>
+<div class="luz" aria-hidden="true"></div>
+
+<main id="inicio">
+
+  <!-- 00 · abertura -->
+  <section class="cap cap-0" id="cap-0" data-fase="0">
+    <div class="cap-cena hero">
+      <div class="hero-txt">
+        <p class="sobre"><span class="live" aria-hidden="true"></span>Conceito independente · Connect Alpha</p>
+        <h1 class="hero-t" aria-label="Ouça com os olhos."><span class="l">Ouça com</span><span class="l verde">os olhos.</span></h1>
+        <p class="hero-sub">Uma jornada em que a música vira imagem: do silêncio ao show, do vinil ao seu ano inteiro. Role, clique, gire.</p>
+        <div class="hero-cta">
+          <button class="btn btn-verde grande btn-play" id="btnPlay" type="button" aria-pressed="false">
+            <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <svg class="ico-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+            <span id="btnPlayTxt">Apertar play</span>
+          </button>
+          <a class="btn btn-fantasma grande" href="#cap-1">Ver a jornada</a>
+        </div>
+        <div class="player" id="player" aria-live="off">
+          <img class="player-capa" id="playerCapa" src="assets/capas/manha.svg" alt="" width="52" height="52">
+          <div class="player-meta">
+            <span class="player-rot">Tocando agora</span>
+            <b class="player-nome" id="playerNome">Manhã devagar</b>
+            <span class="player-sub" id="playerSub">Acústico e café · 92 BPM</span>
+          </div>
+          <div class="player-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="player-prog" aria-hidden="true"><b id="playerBarra"></b></div>
+          <span class="player-tempo" id="playerTempo" aria-hidden="true">0:00</span>
+        </div>
+      </div>
+
+      <div class="orbita" id="orbita" aria-label="Capas das playlists. Clique para escolher.">
+        <div class="orbita-brilho" aria-hidden="true"></div>
+        <div class="anel" id="anel">
+          <button class="capa" style="--i:0" type="button" data-i="0" aria-label="Manhã devagar"><img src="assets/capas/manha.svg" alt="" draggable="false"></button>
+          <button class="capa" style="--i:1" type="button" data-i="1" aria-label="Foco total"><img src="assets/capas/foco.svg" alt="" draggable="false"></button>
+          <button class="capa" style="--i:2" type="button" data-i="2" aria-label="Treino pesado"><img src="assets/capas/treino.svg" alt="" draggable="false"></button>
+          <button class="capa" style="--i:3" type="button" data-i="3" aria-label="Estrada à noite"><img src="assets/capas/estrada.svg" alt="" draggable="false"></button>
+          <button class="capa" style="--i:4" type="button" data-i="4" aria-label="Pista"><img src="assets/capas/pista.svg" alt="" draggable="false"></button>
+          <button class="capa" style="--i:5" type="button" data-i="5" aria-label="Madrugada"><img src="assets/capas/madrugada.svg" alt="" draggable="false"></button>
+        </div>
+        <div class="orbita-chao" aria-hidden="true"></div>
+      </div>
+
+      <div class="role" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <!-- 01 · silêncio -->
+  <section class="cap cap-1" id="cap-1" data-fase="1">
+    <div class="cap-trilho">
+      <div class="cap-cena cap-pin">
+        <p class="rotulo">Capítulo 01 · <b>Silêncio</b></p>
+        <h2 class="t-cap"><span data-rev>Antes da</span> <span data-rev>música,</span> <span data-rev class="verde">silêncio.</span></h2>
+        <p class="txt" data-rev>Uma linha parada, um segundo antes do primeiro compasso. É dali que sai tudo o que você ouve.</p>
+        <div class="medidor" aria-hidden="true"><span>Volume</span><i><b id="medVol"></b></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · batida -->
+  <section class="cap cap-2" id="cap-2" data-fase="2" data-video-desktop="assets/video/batida.mp4" data-video-mobile="assets/video/batida-m.mp4">
+    <video class="cena-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <div class="cap-trilho">
+      <div class="cap-cena cap-pin">
+        <p class="rotulo">Capítulo 02 · <b>Batida</b></p>
+        <h2 class="t-cap"><span data-rev>Aí vem</span> <span data-rev>o primeiro</span> <span data-rev class="verde">pulso.</span></h2>
+        <p class="txt" data-rev>O ritmo organiza o caos. Cada barra que sobe é um instrumento entrando na sala.</p>
+        <div class="bpm" aria-hidden="true"><b id="bpmNum">0</b><span>BPM</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · playlist -->
+  <section class="cap cap-3" id="cap-3" data-fase="3">
+    <div class="cap-trilho">
+      <div class="cap-cena cap-pin">
+        <p class="rotulo">Capítulo 03 · <b>Playlist</b></p>
+        <h2 class="t-cap"><span data-rev>Cada momento</span> <span data-rev>ganha</span> <span data-rev class="verde">uma trilha.</span></h2>
+        <p class="txt" data-rev>Foco, treino, estrada, madrugada. O disco gira, a sala muda, e a música certa já está tocando.</p>
+        <ul class="faixa-lista" aria-label="Exemplos de clima">
+          <li>Manhã devagar</li><li>Foco total</li><li>Treino pesado</li><li>Estrada à noite</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · show -->
+  <section class="cap cap-4" id="cap-4" data-fase="4" data-video-desktop="assets/video/show.mp4" data-video-mobile="assets/video/show-m.mp4">
+    <video class="cena-video" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <div class="cap-trilho">
+      <div class="cap-cena cap-pin">
+        <p class="rotulo">Capítulo 04 · <b>Show</b></p>
+        <h2 class="t-cap"><span data-rev>Milhares</span> <span data-rev>cantando</span> <span data-rev class="verde">a mesma letra.</span></h2>
+        <p class="txt" data-rev>Fone no ouvido é íntimo. Estádio é coletivo. A mesma canção, dois jeitos de sentir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · wrapped -->
+  <section class="cap cap-5" id="cap-5" data-fase="5">
+    <div class="cap-trilho">
+      <div class="cap-cena cap-pin">
+        <p class="rotulo">Capítulo 05 · <b>Seu ano</b></p>
+        <h2 class="t-cap"><span data-rev>No fim,</span> <span data-rev>sobra</span> <span data-rev class="verde">a sua história.</span></h2>
+        <p class="txt" data-rev>Minutos viram retrato. O que você repetiu mostra quem você foi neste ano.</p>
+        <div class="wrapped" aria-label="Exemplo ilustrativo de resumo do ano">
+          <div class="w-card"><span class="w-n" data-conta="42318">0</span><span class="w-l">minutos ouvidos</span></div>
+          <div class="w-card"><span class="w-n" data-conta="187">0</span><span class="w-l">artistas diferentes</span></div>
+          <div class="w-card"><span class="w-n" data-conta="23">0</span><span class="w-l">dias em sequência</span></div>
+        </div>
+        <p class="nota">Números ilustrativos, só para o conceito.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- site -->
+  <div class="site">
+
+    <section class="sec" id="momentos">
+      <div class="sec-in">
+        <p class="rotulo">Para cada momento</p>
+        <h2 class="t-sec">Uma trilha para <span class="verde">cada pedaço do dia.</span></h2>
+        <p class="sec-sub">Seis climas. Cada card tem cor, ritmo e jeito próprios, e o fundo da página muda com eles.</p>
+        <div class="cards" id="cards">
+          <button class="card" data-cor="#1ed760" data-bpm="92" data-nome="Manhã devagar" type="button">
+            <span class="card-capa c1" aria-hidden="true"></span>
+            <span class="card-tit">Manhã devagar</span><span class="card-sub">Acústico e café · 92 BPM</span>
+          </button>
+          <button class="card" data-cor="#4f8cff" data-bpm="110" data-nome="Foco total" type="button">
+            <span class="card-capa c2" aria-hidden="true"></span>
+            <span class="card-tit">Foco total</span><span class="card-sub">Eletrônico suave · 110 BPM</span>
+          </button>
+          <button class="card" data-cor="#ff4d3a" data-bpm="140" data-nome="Treino pesado" type="button">
+            <span class="card-capa c3" aria-hidden="true"></span>
+            <span class="card-tit">Treino pesado</span><span class="card-sub">Rock e trap · 140 BPM</span>
+          </button>
+          <button class="card" data-cor="#ffb02e" data-bpm="100" data-nome="Estrada à noite" type="button">
+            <span class="card-capa c4" aria-hidden="true"></span>
+            <span class="card-tit">Estrada à noite</span><span class="card-sub">Indie e synth · 100 BPM</span>
+          </button>
+          <button class="card" data-cor="#b46bff" data-bpm="124" data-nome="Pista" type="button">
+            <span class="card-capa c5" aria-hidden="true"></span>
+            <span class="card-tit">Pista</span><span class="card-sub">House e disco · 124 BPM</span>
+          </button>
+          <button class="card" data-cor="#ff7ac6" data-bpm="76" data-nome="Madrugada" type="button">
+            <span class="card-capa c6" aria-hidden="true"></span>
+            <span class="card-tit">Madrugada</span><span class="card-sub">Lo-fi e voz baixa · 76 BPM</span>
+          </button>
+        </div>
+        <p class="cards-dica" id="cardsDica">Toque em um card para mudar a cor e a batida da página.</p>
+      </div>
+    </section>
+
+    <section class="sec sec-faixa" aria-hidden="true">
+      <div class="marquee"><div class="marquee-in">
+        <span>ouvir</span><i></i><span>descobrir</span><i></i><span>repetir</span><i></i><span>compartilhar</span><i></i><span>sentir</span><i></i>
+        <span>ouvir</span><i></i><span>descobrir</span><i></i><span>repetir</span><i></i><span>compartilhar</span><i></i><span>sentir</span><i></i>
+      </div></div>
+    </section>
+
+    <section class="sec" id="recursos">
+      <div class="sec-in">
+        <p class="rotulo">O que a experiência faz</p>
+        <h2 class="t-sec">Feito para <span class="verde">ficar na cabeça.</span></h2>
+        <div class="recursos">
+          <article class="rec"><span class="rec-n">01</span><h3>Descoberta</h3><p>Sugestões que aprendem com o que você repete, pula e salva.</p></article>
+          <article class="rec"><span class="rec-n">02</span><h3>Todos os seus lugares</h3><p>Celular, computador, carro e caixa de som. A fila continua de onde parou.</p></article>
+          <article class="rec"><span class="rec-n">03</span><h3>Feito junto</h3><p>Playlists colaborativas e sessões em grupo, cada um acrescenta a sua faixa.</p></article>
+          <article class="rec"><span class="rec-n">04</span><h3>Podcasts e voz</h3><p>Música e conversa no mesmo lugar, com capítulos e velocidade ajustável.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="perguntas">
+      <div class="sec-in estreito">
+        <p class="rotulo">Perguntas</p>
+        <h2 class="t-sec">O que <span class="verde">perguntam.</span></h2>
+        <div class="faq">
+          <details><summary>Este é o site oficial do Spotify?</summary><p>Não. É um projeto conceitual independente, criado pela Connect Alpha para mostrar direção de arte e rolagem cinematográfica. Não tem patrocínio nem aprovação do Spotify.</p></details>
+          <details><summary>De onde vem o som?</summary><p>É sintetizado na hora, no seu navegador (Web Audio). Nenhum arquivo de música é usado. Liga e desliga no botão Som ou na tecla M.</p></details>
+          <details><summary>Os números do Wrapped são reais?</summary><p>Não, são ilustrativos. Servem só para mostrar o capítulo final.</p></details>
+          <details><summary>Dá para fazer algo assim para a minha marca?</summary><p>Dá. Um site de jornada pode ser montado para qualquer negócio. Chame a Connect Alpha no WhatsApp.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec-fim" id="fim">
+      <div class="sec-in centro">
+        <p class="rotulo">Fim da faixa</p>
+        <h2 class="t-fim">Aperte <span class="verde">play.</span></h2>
+        <p class="sec-sub">Conceito independente feito pela Connect Alpha. Quer uma jornada assim para a sua marca?</p>
+        <div class="cta-linha">
+          <a class="btn btn-verde grande" href="#inicio" id="btnTopo">Ouvir de novo</a>
+          <a class="btn btn-fantasma grande" href="https://wa.me/5535998872633?text=Oi!%20Vi%20o%20conceito%20do%20Spotify%20e%20quero%20uma%20experi%C3%AAncia%20assim." rel="noopener">Falar com a Connect Alpha</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="rodape">
+      <p class="aviso">Projeto conceitual independente. Não é oficial e não tem relação com o Spotify AB. Música sintetizada no navegador; nenhum material de terceiros é reproduzido.</p>
+      <p class="credito">Feito por Connect Alpha · Lavras, MG</p>
+    </footer>
+  </div>
+</main>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="js/scrub.js?v=1"></script>
+<script src="js/som.js?v=1"></script>
+<script src="js/palco.js?v=2"></script>
+<script src="js/pagina.js?v=2"></script>
+<script src="js/hero.js?v=1"></script>
+</body>
+</html>

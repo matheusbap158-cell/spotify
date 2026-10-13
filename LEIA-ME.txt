@@ -1,0 +1,50 @@
+SPOTIFY · SOM QUE VIRA IMAGEM · CONCEITO CONNECT ALPHA
+Projeto conceitual independente. Não é oficial e não tem relação com o Spotify. Só local (sem git, sem publicação).
+Feito em 13/10/2026.
+
+COMO VER
+  node "_ferramentas/preview-local.mjs" "4. Meus Clientes/2. Demos e propostas/Spotify" 8794
+  (rodar da pasta raiz "Connect Alpha") e abrir http://localhost:8794
+
+HERO (v2, 13/10): órbita 3D de 6 capas (CSS 3D, gira sozinha, reage ao mouse e à rolagem, clique ou arraste),
+  a capa da frente muda cor e BPM da página; player Tocando agora funcional; título letra a letra;
+  anel de espectro + poeira no canvas; luz que segue o cursor; botões magnéticos; seções entram com stagger.
+  Arquivos: css/hero.css, js/hero.js (aditivos). Capas em assets/capas/*.svg.
+
+JORNADA (5 capítulos, tudo desenhado em código; sem vídeo ele já funciona)
+  00 Abertura   linha de silêncio
+  01 Silêncio   linha acorda, círculos lentos
+  02 Batida     equalizador de 64 barras + contador de BPM
+  03 Playlist   vinil que gira com a rolagem + anel de barras
+  04 Show       feixes de luz e plateia
+  05 Seu ano    ondas coloridas + 3 números (ilustrativos)
+  Depois: Momentos (6 cards que trocam a cor e a batida da página), faixa, Recursos, Perguntas, CTA, rodapé.
+
+SOM
+  Sintetizado no navegador (Web Audio), nenhum arquivo de música. Botão Som ou tecla M.
+  A rolagem controla a intensidade: pad, chimbal, bumbo, baixo e arpejo entram em camadas.
+  Cada card muda BPM e tom. O som desliga ao sair da aba.
+
+ARQUIVOS
+  index.html · css/style.css · js/som.js (áudio) · js/palco.js (canvas) · js/pagina.js (revelação, cards, som, vídeos)
+  js/scrub.js (vídeo guiado pela rolagem, copiado da NASA) · vendor/ (GSAP 3.12.5 + ScrollTrigger)
+
+VÍDEOS DO FLOW (opcional, ainda NÃO gerados)
+  Se existirem, entram sozinhos por trás do desenho, guiados pela rolagem. Sem o arquivo, nada muda.
+  Salvar como (sem áudio, todos os quadros como chave, como na NASA):
+    assets/video/batida.mp4  e  assets/video/batida-m.mp4   (capítulo 02)
+    assets/video/show.mp4    e  assets/video/show-m.mp4     (capítulo 04)
+  Regravar: ffmpeg -i original.mp4 -an -g 1 -crf 26 batida.mp4  (celular: -vf scale=854:-2)
+  Prompts (plano único, câmera lenta, 8 s, 16:9, sem texto, sem logotipos):
+  BATIDA: "Extreme close-up of a studio speaker cone vibrating in slow motion, fine dust and water droplets
+    jumping off the membrane, deep black background, single green rim light, shallow depth of field,
+    cinematic, slow steady camera push-in, no text, no logos."
+  SHOW: "Wide shot from the back of a dark concert crowd, hands raised in silhouette, sweeping green and white
+    spotlight beams through haze, slow camera glide forward, cinematic, no faces visible, no text, no logos."
+  Marcar na página "animação gerada por IA" quando entrarem.
+
+PENDÊNCIAS ANTES DE PUBLICAR
+  - Teste em celular real (som e rolagem).
+  - Confirmar o que fazer com o nome "Spotify" no título (conceito independente, aviso já está no rodapé e no FAQ).
+  - Vídeos do Flow (opcional) e og.jpg.
+  - Publicar só com OK do usuário.

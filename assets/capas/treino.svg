@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<defs>
+<linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a3c"/><stop offset="1" stop-color="#4a0a06"/></linearGradient>
+<linearGradient id="y" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1a8"/><stop offset="1" stop-color="#ff9a1f"/></linearGradient>
+</defs>
+<rect width="600" height="600" fill="url(#r)"/>
+<g fill="#000" opacity=".22">
+<path d="M-40 520L300-80l60 0L20 600Z"/>
+<path d="M120 640L480 0h60L180 640Z"/>
+<path d="M300 640L620 70v110L400 640Z"/>
+</g>
+<path d="M350 70L170 340h115l-45 190L440 240H320Z" fill="url(#y)"/>
+<path d="M350 70L170 340h115l-45 190" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="4" stroke-linejoin="round"/>
+<g fill="#16080a">
+<rect x="40" y="520" width="520" height="14" rx="7"/>
+<rect x="64" y="496" width="22" height="62" rx="6"/><rect x="96" y="506" width="16" height="42" rx="5"/>
+<rect x="514" y="496" width="22" height="62" rx="6"/><rect x="488" y="506" width="16" height="42" rx="5"/>
+</g>
+</svg>

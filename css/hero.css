@@ -1,0 +1,115 @@
+/* Hero e acabamento (aditivo). Remover este arquivo e o hero.js devolve a abertura simples. */
+:root{--beat:0;--mx:50vw;--my:50vh}
+
+/* luz que segue o cursor, em todo o site */
+.luz::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(520px 520px at var(--mx) var(--my),color-mix(in srgb,var(--acento) 13%,transparent),transparent 62%);
+  transition:background .4s}
+
+/* cabeçalho de vidro depois de rolar */
+.topo{transition:background .35s,backdrop-filter .35s,border-color .35s;border-bottom:1px solid transparent}
+.topo.rolou{background:rgba(6,5,7,.62);-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);border-bottom-color:var(--linha)}
+
+/* ===== HERO ===== */
+.cap-0{min-height:100svh;display:block}
+.cap-0 .cap-cena.hero{position:relative;min-height:100svh;max-width:none;width:100%;
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);align-items:center;gap:clamp(10px,3vw,50px);
+  padding:110px clamp(20px,5vw,90px) 70px;text-align:left}
+.hero-txt{position:relative;z-index:3;display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+.sobre{display:flex;align-items:center;gap:10px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--acento);box-shadow:0 0 0 0 var(--acento);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acento) 70%,transparent)}100%{box-shadow:0 0 0 12px transparent}}
+.hero-t{font-size:clamp(3rem,8.4vw,8.2rem);line-height:.9;font-weight:900;letter-spacing:-.045em}
+.hero-t .l{display:block;white-space:nowrap}
+.hero-t .p{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-right:.22em}
+.hero-t .ch{display:inline-block;transform:translateY(112%) rotate(7deg);opacity:0}
+body:not(.carregando) .hero-t .ch{animation:chIn 1s var(--ease) both;animation-delay:calc(var(--d,0s) + .35s)}
+@keyframes chIn{to{transform:none;opacity:1}}
+.hero-t .verde{text-shadow:0 0 calc(8px + var(--beat) * 46px) color-mix(in srgb,var(--acento) 55%,transparent)}
+.hero-sub{max-width:44ch;font-size:clamp(1rem,1.5vw,1.28rem);color:#cfcad6;opacity:0;transform:translateY(16px)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;opacity:0;transform:translateY(16px)}
+.player{opacity:0;transform:translateY(16px)}
+body:not(.carregando) .hero-sub{animation:subir .9s var(--ease) 1s both}
+body:not(.carregando) .hero-cta{animation:subir .9s var(--ease) 1.15s both}
+body:not(.carregando) .player{animation:subir .9s var(--ease) 1.3s both}
+@keyframes subir{to{opacity:1;transform:none}}
+
+.btn-play{gap:10px;padding:16px 30px;font-size:1.05rem;position:relative}
+.btn-play svg{width:20px;height:20px;fill:currentColor}
+.btn-play .ico-pausa{display:none}
+.btn-play[aria-pressed="true"] .ico-play{display:none}
+.btn-play[aria-pressed="true"] .ico-pausa{display:block}
+.btn-play::after{content:"";position:absolute;inset:-6px;border-radius:999px;border:2px solid var(--acento);opacity:0;transform:scale(.9)}
+.btn-play[aria-pressed="false"]::after{animation:chama 2.2s ease-out infinite}
+@keyframes chama{0%{opacity:.7;transform:scale(.92)}100%{opacity:0;transform:scale(1.18)}}
+
+/* player */
+.player{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"capa meta eq" "prog prog tempo";align-items:center;
+  gap:6px 14px;width:min(100%,430px);padding:12px 16px 12px 12px;border-radius:16px;
+  background:rgba(14,12,18,.62);border:1px solid var(--linha);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 20px 50px -24px rgba(0,0,0,.9)}
+.player-capa{grid-area:capa;width:52px;height:52px;border-radius:10px;object-fit:cover;box-shadow:0 8px 20px -8px rgba(0,0,0,.8)}
+.player-meta{grid-area:meta;display:flex;flex-direction:column;min-width:0}
+.player-rot{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acento)}
+.player-nome{font-size:1.02rem;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-sub{font-size:.8rem;color:var(--mudo);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-eq{grid-area:eq;display:flex;gap:3px;align-items:flex-end;height:22px}
+.player-eq i{width:4px;height:100%;background:var(--acento);border-radius:2px;transform-origin:bottom;transform:scaleY(.2);transition:transform .2s}
+.player.tocando .player-eq i{animation:eq 1s ease-in-out infinite}
+.player.tocando .player-eq i:nth-child(2){animation-delay:.15s}.player.tocando .player-eq i:nth-child(3){animation-delay:.3s}.player.tocando .player-eq i:nth-child(4){animation-delay:.45s}
+.player-prog{grid-area:prog;height:4px;border-radius:2px;background:var(--linha);overflow:hidden;margin-top:6px}
+.player-prog b{display:block;height:100%;width:100%;background:var(--acento);transform-origin:left;transform:scaleX(0)}
+.player-tempo{grid-area:tempo;font-size:.72rem;color:var(--mudo);font-variant-numeric:tabular-nums;margin-top:6px}
+
+/* ===== órbita de capas 3D ===== */
+.orbita{--w:clamp(150px,21vw,330px);position:relative;height:min(78svh,720px);perspective:1500px;perspective-origin:50% 40%;z-index:2;
+  display:grid;place-items:center;touch-action:pan-y}
+.orbita-brilho{position:absolute;left:50%;top:48%;width:min(60vw,720px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--acento) 34%,transparent),transparent 62%);
+  filter:blur(18px);opacity:calc(.5 + var(--beat) * .5);pointer-events:none}
+.anel{position:relative;width:var(--w);height:var(--w);transform-style:preserve-3d;
+  transform:rotateX(var(--tx,-10deg)) rotateY(var(--rot,0deg)) rotateZ(var(--tz,0deg));will-change:transform}
+.capa{position:absolute;inset:0;padding:0;border:0;background:none;border-radius:calc(var(--w) * .06);cursor:pointer;
+  transform:rotateY(calc(var(--i) * 60deg)) translateZ(calc(var(--w) * 1.12));
+  scale:calc(1 + var(--beat) * .035);transition:filter .3s;
+  -webkit-box-reflect:below 6px linear-gradient(transparent 62%,rgba(255,255,255,.28));
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.9)}
+.capa img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit;backface-visibility:visible;
+  filter:brightness(var(--br,1));pointer-events:none;user-select:none;-webkit-user-drag:none}
+.capa::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 38%)}
+.capa:hover{filter:brightness(1.12)}
+.capa:focus-visible{outline:3px solid var(--acento);outline-offset:6px}
+.orbita-chao{position:absolute;left:50%;bottom:6%;width:70%;height:90px;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(ellipse,rgba(0,0,0,.7),transparent 70%);filter:blur(10px);pointer-events:none}
+
+/* entrada: as capas voam de longe e assentam */
+.anel{opacity:0}
+body:not(.carregando) .anel{animation:orbitaIn 1.8s var(--ease) .1s both}
+@keyframes orbitaIn{from{opacity:0;scale:.35;translate:0 40px}to{opacity:1;scale:1;translate:0 0}}
+
+.hero .role{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);margin:0}
+
+/* ===== acabamento do site ===== */
+.btn{will-change:transform}
+.sec-in .rotulo{display:inline-flex;align-items:center;gap:10px}
+.sec-in .rotulo::before{content:"";width:22px;height:2px;background:var(--acento);border-radius:2px}
+.sec-fim{background:radial-gradient(70% 60% at 50% 100%,color-mix(in srgb,var(--acento) 22%,transparent),transparent 70%)}
+.t-fim .verde{text-shadow:0 0 60px color-mix(in srgb,var(--acento) 45%,transparent)}
+
+@media (max-width:900px){
+  .cap-0 .cap-cena.hero{grid-template-columns:1fr;padding-top:96px;gap:0;align-content:start}
+  .orbita{--w:clamp(120px,36vw,210px);height:min(52svh,430px);margin-top:10px}
+  .hero-t{font-size:clamp(2.7rem,13vw,5rem)}
+  .hero-txt{gap:14px}
+  .player{display:none}
+  .hero .role{display:none}
+  .orbita{height:min(46svh,400px)}
+}
+@media (max-width:560px){
+  .player{width:100%}
+  .hero-sub{font-size:.98rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-t .ch,.hero-sub,.hero-cta,.player,.anel{opacity:1!important;transform:none!important;translate:none!important;scale:none!important;animation:none!important}
+}

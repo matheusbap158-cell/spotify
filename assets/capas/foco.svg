@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<defs>
+<radialGradient id="b" cx=".5" cy=".5" r=".75"><stop offset="0" stop-color="#2f66ff"/><stop offset=".6" stop-color="#16308f"/><stop offset="1" stop-color="#070d2b"/></radialGradient>
+<radialGradient id="g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#bcd4ff"/><stop offset="1" stop-color="#4f8cff" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="600" height="600" fill="url(#b)"/>
+<g stroke="#8fb2ff" stroke-opacity=".18" stroke-width="2">
+<path d="M0 100H600M0 200H600M0 300H600M0 400H600M0 500H600M100 0V600M200 0V600M300 0V600M400 0V600M500 0V600"/>
+</g>
+<g fill="none" stroke="#cfe0ff">
+<circle cx="300" cy="300" r="40" stroke-width="3" opacity=".95"/>
+<circle cx="300" cy="300" r="90" stroke-width="3" opacity=".75"/>
+<circle cx="300" cy="300" r="150" stroke-width="3" opacity=".5"/>
+<circle cx="300" cy="300" r="215" stroke-width="3" opacity=".3"/>
+<circle cx="300" cy="300" r="285" stroke-width="3" opacity=".16"/>
+</g>
+<g stroke="#cfe0ff" stroke-width="3" stroke-linecap="round" opacity=".7">
+<path d="M300 40v50M300 510v50M40 300h50M510 300h50"/>
+</g>
+<circle cx="300" cy="300" r="110" fill="url(#g)" opacity=".7"/>
+<circle cx="300" cy="300" r="16" fill="#fff"/>
+<circle cx="430" cy="170" r="7" fill="#9dc0ff"/>
+<circle cx="160" cy="430" r="5" fill="#9dc0ff" opacity=".7"/>
+</svg>
